@@ -86,7 +86,10 @@ module Async
 						uri = URI.parse(location)
 						
 						if uri.absolute?
-							return response
+							endpoint = Endpoint[uri]
+							request.scheme = endpoint.scheme
+							request.authority = endpoint.authority
+							request.path = endpoint.path
 						else
 							request.path = Reference[request.path] + location
 						end
