@@ -29,6 +29,8 @@ module Async
 						@reading = true
 						
 						super
+					ensure
+						@closed.value = true if @body.empty?
 					end
 					
 					def close(error = nil)
